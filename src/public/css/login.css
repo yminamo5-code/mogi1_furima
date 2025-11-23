@@ -1,0 +1,36 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    height: 47.58px;
+    display: flex;
+    justify-content: center;
+}
+
+.information {
+    width: 100%;
+}
+
+.label {
+    height: 35px;
+}
+
+.information input {
+    border: 1px solid #5F5F5F;
+    height: 60px;
+    width: 100%;
+}
+
+.button-login {
+    height: 62.25px;
+    background-color:#FF5555;
+    color: #FFFFFF;
+}
+
+.register {
+    text-decoration: none;
+    color: #0073CC;
+}
