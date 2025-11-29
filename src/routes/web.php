@@ -15,5 +15,4 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::match(['get', 'post'], '/', [ItemController::class, 'index']);
-Route::get('/register', function () {return view('register');});
-Route::get('/login', function () {return view('login');});
+Route::post('/profile', [ItemController::class, 'register']);
