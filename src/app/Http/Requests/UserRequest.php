@@ -26,19 +26,21 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required', 'max:20'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8'],
+            'password_confirmation' => ['required', 'same:password'],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.max' => 'ユーザー名は20文字以内にしてください',
-            'name.required' => 'ユーザー名を入力してください',
+            'name.max' => 'お名前は20文字以内にしてください',
+            'name.required' => 'お名前を入力してください',
             'email.required' => 'メールアドレスを入力してください',
-            'email.email' => 'メールアドレスは「ユーザー名＠ドメイン」形式で入力してください',
+            'email.email' => 'メールアドレスはメール形式で入力してください',
             'password.required' => 'パスワードを入力してください',
             'password.min' => 'パスワードは8文字以上にしてください',
+            'password_confirmation.same' => 'パスワードと一致しません',
         ];
     }
 }

@@ -1,0 +1,26 @@
+.content{
+    display: flex;
+}
+
+.left{
+    width: 50%;
+}
+
+.left img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.right{
+    width: 50%;
+}
+
+.purchase{
+    color:#FFFFFF;
+    background-color: #FF5555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 570px;
+}

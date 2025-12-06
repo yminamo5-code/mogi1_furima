@@ -9,3 +9,16 @@ header img{
     height: 36px;
     margin-left: 25px;
 }
+
+.search{
+    background-color: #FFFFFF;
+}
+
+.search::placeholder{
+    color: #000000;
+}
+
+.sell{
+    background-color: #FFFFFF;
+    color: #000000;
+}

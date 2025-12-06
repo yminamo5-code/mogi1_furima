@@ -6,7 +6,7 @@
 
 @section('content')
 <main>
-    <form action="/profile" method="post">
+    <form action="/mypage/profile" method="post">
         @csrf
         <div class="information">
             <h1>会員登録</h1>

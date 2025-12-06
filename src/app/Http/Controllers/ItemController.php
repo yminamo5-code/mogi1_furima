@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +22,22 @@ class ItemController extends Controller
         return view('index', compact('tab', 'items'));
     }
 
-    public function register(UserRequest $request)
+    public function show($id)
     {
-        Item::create($request->validate());
-        return redirect()->route('register');
+        $item = Item::findOrFail($id);
+        return view('item', compact('item'));
+    }
+
+    public function purchase(Request $request)
+    {
+        $id = $request->input('id');
+        $item = Item::findOrFail($id);
+        return view('purchase', compact('item'));
+    }
+
+    public function list()
+    {
+        $categories = Category::all();
+        return view('list', compact('categories'));
     }
 }
