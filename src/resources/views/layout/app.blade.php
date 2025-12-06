@@ -14,14 +14,26 @@
         @hasSection('search')
         <input class="search" type="text" placeholder="　なにをお探しですか？">
         @endif
-        @hasSection('in_out')
-        <input class="in_out">
-        @endif
+
+        <!-- ログイン／ログアウト切り替え -->
+        @auth
+            {{-- ログイン中：ログアウトボタン --}}
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="in_out">ログアウト</button>
+            </form>
+        @endauth
+
+        @guest
+            <!-- 未ログイン時：ログインボタン -->
+            <a href="{{ route('login') }}" class="in_out">ログイン</a>
+        @endguest
+
         @hasSection('mypage')
-        <input class="mypage">
+        <a href="{{ route('profile') }}" class="mypage">マイページ</a>
         @endif
         @hasSection('sell')
-        <button class="sell">出品</button>
+        <a href="{{ route('list') }}" class="list">出品</a>
         @endif
 
 
