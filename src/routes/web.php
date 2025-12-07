@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\UserController;
 Route::match(['get', 'post'], '/', [ItemController::class, 'index']);
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
-Route::post('/mypage/profile', [UserController::class, 'profile_edit'])->name('profile_edit');
+Route::post('/mypage/profile', [AuthController::class, 'register'])->name('register');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::get('/list', [ItemController::class, 'list'])->name('list');
+Route::post('/', [UserController::class, 'profile_update'])->name('profile.update');

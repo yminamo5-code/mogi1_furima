@@ -15,19 +15,19 @@
         <input class="search" type="text" placeholder="　なにをお探しですか？">
         @endif
 
+        @hasSection('in_out')
         <!-- ログイン／ログアウト切り替え -->
-        @auth
-            {{-- ログイン中：ログアウトボタン --}}
+        @if (Auth::check())
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="in_out">ログアウト</button>
             </form>
-        @endauth
 
-        @guest
+        @else
             <!-- 未ログイン時：ログインボタン -->
             <a href="{{ route('login') }}" class="in_out">ログイン</a>
-        @endguest
+        @endif
+        @endif
 
         @hasSection('mypage')
         <a href="{{ route('profile') }}" class="mypage">マイページ</a>
