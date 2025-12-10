@@ -11,13 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile_edit(Request $request)
-    {    
-        $user = Auth::user();
-        return view('profile_edit', compact('user'));
-    }
-
-    public function profile_update(ProfileRequest $request)
+    public function profile_update(Request $request)
     {
         $user = auth()->user();
 

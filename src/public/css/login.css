@@ -34,3 +34,7 @@ h1 {
     text-decoration: none;
     color: #0073CC;
 }
+
+.error {
+    color: red;
+}

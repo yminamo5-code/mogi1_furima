@@ -4,6 +4,19 @@
 <link rel="stylesheet" href="{{ asset('css/item.css')}}">
 @endsection
 
+@section('search')
+<!-- 空だと表示されないのでコメントを置いとく -->
+@endsection
+@section('in_out')
+<!-- 空だと表示されないのでコメントを置いとく -->
+@endsection
+@section('mypage')
+<!-- 空だと表示されないのでコメントを置いとく -->
+@endsection
+@section('sell')
+<!-- 空だと表示されないのでコメントを置いとく -->
+@endsection
+
 @section('content')
 <div class="content">
     <div class="left">
@@ -14,7 +27,21 @@
         <h1>{{ $item->itemname }}</h1>
         <p>{{ $item->brand }}</p>
         <p>&yen;{{number_format($item->price) }}(税込み)</p>
-        <!-- いいねとコメント数 -->
+
+        <form action="{{route('item.like',['item_id'=>$item->id])}}" method="POST">
+            @csrf
+            <button type="submit" class="like"> 
+                @if($liked)
+                    <img src="{{ asset('images/ハートロゴ_ピンク.png') }}" alt="ハートロゴ_ピンク">
+                @else
+                    <img src="{{ asset('images/ハートロゴ_デフォルト.png') }}" alt="ハートロゴ_デフォルト">
+                @endif
+            </button>
+        </form>
+            <p>{{ $likeCount }}</p>
+
+            <img src="{{ asset('images/ふきだしロゴ.png') }}" alt="ふきだしロゴ">
+ 
 
         <form action="{{ route('item.purchase') }}" method="POST">
             @csrf

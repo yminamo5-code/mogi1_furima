@@ -18,14 +18,14 @@
         @hasSection('in_out')
         <!-- ログイン／ログアウト切り替え -->
         @if (Auth::check())
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="/logout" method="POST">
                 @csrf
                 <button type="submit" class="in_out">ログアウト</button>
             </form>
 
         @else
             <!-- 未ログイン時：ログインボタン -->
-            <a href="{{ route('login') }}" class="in_out">ログイン</a>
+            <a href="/login" class="in_out">ログイン</a>
         @endif
         @endif
 

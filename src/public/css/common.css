@@ -18,7 +18,17 @@ header img{
     color: #000000;
 }
 
-.sell{
+.in_out{
+    color:#FFFFFF;
+}
+
+.mypage{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.list{
     background-color: #FFFFFF;
     color: #000000;
+    text-decoration: none;
 }
