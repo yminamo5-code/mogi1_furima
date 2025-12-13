@@ -24,4 +24,5 @@ Route::post('/mypage/profile', [AuthController::class, 'register'])->name('regis
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::get('/list', [ItemController::class, 'list'])->name('list');
 Route::post('/item/{item_id}', [ItemController::class, 'toggleLike'])->name('item.like');
+Route::post('/comment', [ItemController::class, 'comment'])->name('comment');
 /*Route::post('/', [UserController::class, 'profile_update'])->name('profile.update');*/

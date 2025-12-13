@@ -1,9 +1,13 @@
-.content{
+.content {
     display: flex;
 }
 
-.left{
+.left {
     width: 50%;
+}
+
+h2 {
+    font-size: 36px;
 }
 
 .left img {
@@ -12,15 +16,48 @@
     display: block;
 }
 
-.right{
+.right {
     width: 50%;
 }
 
-.purchase{
-    color:#FFFFFF;
+.like_comment {
+    display: flex;
+}
+
+
+.purchase {
+    color: #FFFFFF;
     background-color: #FF5555;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 570px;
+}
+
+.category,
+.condition {
+    display: flex;
+}
+
+.comment_title {
+    font-size: 36px;
+}
+
+.user {
+    display: flex;
+}
+
+.user img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+textarea {
+    border: 2px solid #5F5F5F;
+    height: 246px;
+}
+
+.error{
+    color: red;
 }

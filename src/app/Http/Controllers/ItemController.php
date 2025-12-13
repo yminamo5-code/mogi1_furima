@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Item;
 use App\Models\Like;
 use App\Models\User;
@@ -38,7 +40,13 @@ class ItemController extends Controller
         }
 
         $likeCount = Like::where('item_id', $item->id)->count();
-        return view('item', compact('item','liked','likeCount'));
+
+        $comments=Comment::where('item_id',$item->id)
+                        ->with('user')
+                        ->get();
+
+        $commentCount = Comment::where('item_id', $item->id)->count();
+        return view('item', compact('item','liked','likeCount','commentCount','comments'));
     }
 
     public function togglelike($item_id)
@@ -70,6 +78,24 @@ class ItemController extends Controller
         $id = $request->input('id');
         $item = Item::findOrFail($id);
         return view('purchase', compact('item', 'user'));
+    }
+
+    public function comment(CommentRequest $request)
+    {
+        $user=auth()->user();
+        if(!$user){
+            return redirect('/login');
+        }
+
+        Comment::create([
+            'item_id' => $request->item_id,
+            'user_id' => auth()->id(),
+            'comment' => $request->comment,
+        ]);
+
+        return redirect()->route('item.show', [
+            'id'=>$request->item_id
+        ]);        
     }
 
     public function list()
