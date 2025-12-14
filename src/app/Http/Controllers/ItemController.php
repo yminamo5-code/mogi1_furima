@@ -21,7 +21,10 @@ class ItemController extends Controller
         if($tab === 'recommend'){
             $items = Item::where('user_id', '!=', Auth::id())->get();
         }else{
-            $items = collect();
+            $items= Like::where('user_id', Auth::id())
+                        ->with('item')
+                        ->get()
+                        ->pluck('item');
         }
         return view('index', compact('tab', 'items'));
     }
