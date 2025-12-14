@@ -13,7 +13,7 @@ class ProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'image'=>['nullable','image','mimes:jpeg,png'],
+            'name'=>['required','max:20'],
+            'postcode'=>['required','regex:/^\d{3}-\d{4}$/'],
+            'address'=>['required']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'image.mimes'=>'拡張子が.jpegもしくは.pngにしてください',
+            'name.required'=>'お名前を入力してください',
+            'name.max'=>'お名前は20文字以内にしてください',
+            'postcode.required'=>'郵便番号を入力してください',
+            'postcode.regex'=>'郵便番号は「123-4567」の形式で入力してください',
+            'address.required'=>'住所を入力してください'
         ];
     }
 }

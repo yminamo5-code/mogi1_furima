@@ -20,12 +20,14 @@
 @section('content')
 <main>
     <h1>プロフィール設定</h1>
-    <div class="icon">
-        <img src="" alt="アイコン">
-        <div>画像を選択する</div>
-    </div>
+
     <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
+        <div class="icon">
+            <input type="file" name="image" accept="image/*">
+            <div>画像を選択する</div>
+        </div>
+
         <div class="information">
             <div class=label>ユーザー名</div>
             <input type="text" name="name" value="{{ old('name', $user->name ?? '') }}">
