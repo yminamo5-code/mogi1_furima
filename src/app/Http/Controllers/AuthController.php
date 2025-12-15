@@ -27,10 +27,6 @@ class AuthController extends Controller
             ]);
         }
 
-        $tab = $request->query('tab', 'recommend');
-        $user = Auth::user();
-        $items = $tab === 'mylist' ? $user->mylistItems() : Item::all();
-        $tab = 'mylist';
-        return view('index', ['user' => $user, 'tab' => $tab, 'items' => $items]);
+        return redirect('/?tab=mylist');
     }
 }
