@@ -6,7 +6,7 @@
 
 @section('content')
 <main>
-    <form action="{{route('login')}}" method="post">
+    <form action="{{route('login.post')}}" method="post">
         @csrf
         <div class="information">
             <h1>ログイン</h1>

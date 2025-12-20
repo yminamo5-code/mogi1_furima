@@ -1,0 +1,21 @@
+.row1{
+    display: flex;
+}
+
+
+
+.row1 img{
+    width:150px;
+    height:150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user{
+    font-size: 36px;
+}
+
+.row3 img{
+    width:290px;
+    height:281px;
+}

@@ -15,10 +15,11 @@ class AuthController extends Controller
     {
         $user = app(CreatesNewUsers::class)->create($request->validated());
         Auth::login($user);
-        return view('profile_edit', ['user' => $user]);
+
+        return redirect()->route('profile');
     }   
 
-    public function login(LoginRequest $request)
+    public function login_post(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {

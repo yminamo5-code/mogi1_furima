@@ -28,7 +28,7 @@ class ExhibitionRequest extends FormRequest
             'itemname'=>['required'],
             'description'=>['required','max:255'],
             'image'=>['required','image','mimes:jpeg,png'],
-            'category'=>['required'],
+            'categories'=>['required','array'],
             'condition'=>['required'],
             'price'=> ['required','integer','min:0'],
         ];
@@ -42,7 +42,8 @@ class ExhibitionRequest extends FormRequest
             'description.max'=>'商品説明は255文字以内にしてください',
             'image.required'=>'画像はアップロード必須です',
             'image.mimes'=>'拡張子が.jpegもしくは.pngにしてください',
-            'category.required'=>'商品のカテゴリーを選択してください',
+            'categories.required'=>'商品のカテゴリーを選択してください',
+            'condition.required'=>'商品の状態を選択してください',
             'price.required'=>'商品価格を入力してください',
             'price.integer'=>'数値を入力してください',
             'price.min'=>'0以上を入力してください'

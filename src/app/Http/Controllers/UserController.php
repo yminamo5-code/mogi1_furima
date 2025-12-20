@@ -16,6 +16,7 @@ class UserController extends Controller
     public function profile_update(ProfileRequest $request)
     {
         $user = auth()->user();
+        $path = $user->image;
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
@@ -32,7 +33,7 @@ class UserController extends Controller
         return redirect('/');
     }        
 
-    public function profile(Request $request)
+    public function mypage(Request $request)
     {
         $user = Auth::user();
         $tab = $request->input('tab', 'page=sell');
@@ -40,9 +41,16 @@ class UserController extends Controller
         if($tab === 'page=sell'){
             $items = Item::where('user_id', Auth::id())->get();
         }else{
-            $items = $user()->purchases()->with('item')->get()->pluck('item');
+            $items = $user->purchases()->with('item')->get()->pluck('item');
         }
-        return view('profile', compact('user', 'tab', 'items'));
+        return view('mypage', compact('user', 'tab', 'items'));
+    }
+
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+
+        return view('profile_edit', compact('user'));
     }
 
 }

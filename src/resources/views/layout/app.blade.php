@@ -30,10 +30,10 @@
         @endif
 
         @hasSection('mypage')
-        <a href="{{ route('profile') }}" class="mypage">マイページ</a>
+        <a href="{{ route('mypage') }}" class="mypage">マイページ</a>
         @endif
         @hasSection('sell')
-        <a href="{{ route('list') }}" class="list">出品</a>
+        <a href="{{ route('sell') }}" class="sell">出品</a>
         @endif
 
 

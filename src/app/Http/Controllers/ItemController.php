@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\ExhibitionRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Item;
@@ -101,9 +102,32 @@ class ItemController extends Controller
         ]);        
     }
 
-    public function list()
+    public function sell()
     {
         $categories = Category::all();
-        return view('list', compact('categories'));
+        return view('sell', compact('categories'));
+    }
+
+    public function store(ExhibitionRequest $request)
+    {
+        $user=auth()->user();
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }   
+
+        $item=Item::create([
+            'user_id'=>auth()->id(),
+            'itemname'=>$request->itemname,
+            'brand'=>$request->brand ?? null,
+            'image'=>$path,
+            'price'=>$request->price,
+            'description'=>$request->description,
+            'condition'=>$request->condition
+        ]);
+
+        $item->categories()->attach($request->categories);
+
+        return redirect()->route('index');
     }
 }

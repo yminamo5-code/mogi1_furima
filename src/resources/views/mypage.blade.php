@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/profile.css')}}">
+<link rel="stylesheet" href="{{ asset('css/mypage.css')}}">
 @endsection
 
 @section('search')
@@ -20,10 +20,9 @@
 @section('content')
 <main>
     <div class="row1">
-        <div class="icon">
-            <img src="{{ asset('storage/images/' . $user->image) }}" alt="アイコン">
-            <div class="user">{{ $user->name }}</div>
-        </div>
+        <img src="{{ asset('storage/' . $user->image) }}" alt="アイコン">
+        <div class="user">{{ $user->name }}</div>
+        <a href="{{route('profile')}}" class="edit">プロフィールを編集</a>
     </div>
     <div class="row2">
         <a href="{{ url('/mypage?page=sell') }}" class="{{$tab === 'page=sell' ? 'active-tab' : ''}}">出品した商品</a>
@@ -31,7 +30,7 @@
     </div>
     <div class="row3">
         @foreach($items as $item)
-            <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">
+            <img src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
             <p>{{ $item->itemname }}</p>
         @endforeach
     </div>
