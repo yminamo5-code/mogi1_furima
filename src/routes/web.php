@@ -27,10 +27,14 @@ Route::middleware('auth')->group(function(){
     Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
     Route::get('/mypage/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/mypage/profile/update', [UserController::class, 'profile_update'])->name('profile.update');
-    Route::post('/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
+    Route::get('/purchase/{id}', [ItemController::class, 'return_purchase'])->name('return.purchase');
+    Route::post('/purchase/{id}', [ItemController::class, 'purchase'])->name('item.purchase');
     Route::post('/comment', [ItemController::class, 'comment'])->name('comment');
     Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
     Route::post('/item/{item_id}', [ItemController::class, 'toggleLike'])->name('item.like');
+    Route::get('/purchase/address/{id}', [ItemController::class, 'address_edit'])->name('address.edit');
+    Route::post('/purchase/address/{id}', [ItemController::class, 'address_update'])->name('address.update');
+    Route::post('/pay', [ItemController::class, 'pay'])->name('pay');
 });
 
 

@@ -25,15 +25,16 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'payment_method' => ['required'],
-            'shipping'=>['required']
+            'postcode' => ['required'],
+            'address' => ['required'],
+            'building' => ['nullable']
         ];
     }
 
     public function messages()
     {
         return [
-            'payment_method.required' => '支払い方法を選択してください',
-            'shipping.required' => '配送先を選択してください'
+            'payment_method.required' => '支払い方法を選択してください'
         ];
     }        
 

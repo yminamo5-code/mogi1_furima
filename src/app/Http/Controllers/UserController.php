@@ -19,7 +19,10 @@ class UserController extends Controller
         $path = $user->image;
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
+            $file = $request->file('image');
+            $filename = $file->hashName();
+            $file->storeAs('images',$filename,'public');
+            $path = $filename;
         }        
 
         $user->update([
@@ -36,9 +39,9 @@ class UserController extends Controller
     public function mypage(Request $request)
     {
         $user = Auth::user();
-        $tab = $request->input('tab', 'page=sell');
+        $tab = $request->input('page', 'sell');
 
-        if($tab === 'page=sell'){
+        if($tab === 'sell'){
             $items = Item::where('user_id', Auth::id())->get();
         }else{
             $items = $user->purchases()->with('item')->get()->pluck('item');

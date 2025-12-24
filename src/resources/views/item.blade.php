@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <form action="{{ route('item.purchase') }}" method="POST">
+        <form action="{{ route('item.purchase',['id'=>$item->id]) }}" method="POST">
             @csrf
             <input type="hidden" name="id" value="{{ $item->id }}">
             <button type="submit" class="purchase">購入手続きへ</button>

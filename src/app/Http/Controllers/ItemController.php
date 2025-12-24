@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AddressRequest;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\ExhibitionRequest;
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Item;
@@ -111,9 +113,13 @@ class ItemController extends Controller
     public function store(ExhibitionRequest $request)
     {
         $user=auth()->user();
+        $path=$user->image;
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
+            $file = $request->file('image');
+            $filename = $file->hashName();
+            $file -> storeAs('images',$filename,'public');
+            $path = $filename;
         }   
 
         $item=Item::create([
@@ -130,4 +136,39 @@ class ItemController extends Controller
 
         return redirect()->route('index');
     }
+
+    public function address_edit($id)
+    {
+        $user = auth()->user();
+        $item = Item::findOrFail($id);
+        return view('address', compact('user','item'));
+    }
+
+    public function address_update(AddressRequest $request, $id)
+    {
+        $user = auth()->user();
+        $user->update([
+            'postcode' => $request->postcode,
+            'address'  => $request->address,
+            'building' => $request->building,
+        ]);        
+        return redirect()->route('return.purchase',['id' => $id]);
+    }
+
+    public function return_purchase($id)
+    {
+        $user = auth()->user();
+        $item = Item::findOrFail($id);   
+        return view('purchase',compact('item','user'));
+    }
+
+
+    public function pay(PurchaseRequest $request)
+    {
+
+        
+        return redirect()->route('index');
+    }
+
+
 }

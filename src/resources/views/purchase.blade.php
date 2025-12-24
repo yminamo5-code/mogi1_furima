@@ -20,34 +20,65 @@
 @section('content')
 <main>
     <div class="left">
-        <div class="row1">
-            <div>
-                <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">
+        <form id="payform" action="{{ route('pay') }}" method="post">
+        @csrf
+            <div class="row1">
+                <div>
+                    <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">
+                </div>
+                <div>
+                    <h1 class="itemname">{{$item->itemname}}</h1>
+                    <p class="price">&yen;{{number_format($item->price) }}</p>
+                </div> 
             </div>
-            <div>
-                <h1 class="itemname">{{$item->itemname}}</h1>
-                <p class="price">&yen;{{number_format($item->price) }}</p>
-            </div> 
-        </div>
 
-    <div class="row2">
-        <h2 class=row2-title>支払いの方法</h2>
-            <select name="method">
-                <option value="" disabled selected>選択してください　　　　　　　　▼</opution>
-                <option value="コンビニ払い">コンビニ払い</opution>
-                <option value="カード払い<">カード払い</opution>
-            </select>
+            <div class="row2">
+                <h2 class=row2-title>支払い方法</h2>
+                <select name="payment_method" id="payment-method">
+                    <option value="" disabled selected>選択してください　　　　　　　　▼</option>
+                    <option value="コンビニ払い">コンビニ払い</option>
+                    <option value="カード払い">カード払い</option>
+                </select>
+                @error('payment_method')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="row3">
+                <div class="row3-1">
+                    <h2>配送先</h2>
+                    <a href="{{route('address.edit', ['id' => $item->id])}}">変更する</a>
+                </div>
+                <div class="postcode">〒{{$user->postcode}}</div>
+                <input type="hidden" name="postcode" value="{{ $user->postcode }}">
+                <div name="address" class="address">{{$user->address}}　{{$user->building}}</div>
+                <input type="hidden" name="address" value="{{ $user->address }}">
+                @if ($errors->has('postcode') || $errors->has('address'))
+                    <div class="error">配送先を選択してください</div>
+                @endif
+            </div>
+        </form>
     </div>
-    <div class="row3">
-        <div>
-            <h2>配送先</h2>
+
+    <div class="right">
+        <div class="price">
+            <div class="cell">商品代金</div>
+            <div class="cell">&yen;{{number_format($item->price) }}</div>
+            <div class="cell">支払い方法</div>
+            <div class="cell" id="payment-method-display">コンビニ払い</div>
         </div>
-        
-        <p class="postcode">〒{{$user->postcode}}</p>
-        <p class="address">{{$user->address}}　{{$user->building}}</p>
+        <button class="purchase" type="submit" form="payform">購入する</button>
     </div>
-
-
-
 </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        const select = document.getElementById('payment-method');
+        const display = document.getElementById('payment-method-display');
+
+        select.addEventListener('change',function(){
+            display.textContent = select.value;
+        });
+    });
+</script>
 @endsection

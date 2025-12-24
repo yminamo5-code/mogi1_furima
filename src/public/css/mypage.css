@@ -15,7 +15,22 @@
     font-size: 36px;
 }
 
+.row2 a{
+    text-decoration: none;
+    color: #5F5F5F;
+    font-size: 24px;
+}
+
+.row2 a.active-tab {
+    color: #FF0000;
+}
+
 .row3 img{
     width:290px;
     height:281px;
+}
+
+.item{
+    width:290px;
+    height:320px;
 }

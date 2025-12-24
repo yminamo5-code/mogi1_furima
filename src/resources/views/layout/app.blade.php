@@ -14,30 +14,30 @@
         @hasSection('search')
         <input class="search" type="text" placeholder="　なにをお探しですか？">
         @endif
+        <div class="button">
+            @hasSection('in_out')
+            <!-- ログイン／ログアウト切り替え -->
+            @if (Auth::check())
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="in_out">ログアウト</button>
+                </form>
 
-        @hasSection('in_out')
-        <!-- ログイン／ログアウト切り替え -->
-        @if (Auth::check())
-            <form action="/logout" method="POST">
-                @csrf
-                <button type="submit" class="in_out">ログアウト</button>
-            </form>
+            @else
+                <!-- 未ログイン時：ログインボタン -->
+                <a href="/login" class="in_out">ログイン</a>
+            @endif
+            @endif
 
-        @else
-            <!-- 未ログイン時：ログインボタン -->
-            <a href="/login" class="in_out">ログイン</a>
-        @endif
-        @endif
-
-        @hasSection('mypage')
-        <a href="{{ route('mypage') }}" class="mypage">マイページ</a>
-        @endif
-        @hasSection('sell')
-        <a href="{{ route('sell') }}" class="sell">出品</a>
-        @endif
-
-
+            @hasSection('mypage')
+            <a href="{{ route('mypage') }}" class="mypage">マイページ</a>
+            @endif
+            @hasSection('sell')
+            <a href="{{ route('sell') }}" class="sell">出品</a>
+            @endif
+        </div>   
     </header>
+    
     <main class="content">
       @yield('content')
     </main>    

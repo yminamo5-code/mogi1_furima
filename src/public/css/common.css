@@ -1,6 +1,7 @@
 header{
     background-color: #000000;
     height:82px;
+    max-width: 1400px;
     display: flex;
     align-items: center;
 }
@@ -12,23 +13,36 @@ header img{
 
 .search{
     background-color: #FFFFFF;
+    justify-content: center;
 }
 
 .search::placeholder{
     color: #000000;
 }
 
+.button{
+    display: flex;
+
+}
 .in_out{
     color:#FFFFFF;
+    font-size: 20px;
 }
 
 .mypage{
     color: #FFFFFF;
     text-decoration: none;
+    font-size: 20px;
 }
 
 .sell{
     background-color: #FFFFFF;
     color: #000000;
     text-decoration: none;
+    border-radius: 4px;
+    width:100px;
+    height:50px;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
 }
