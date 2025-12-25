@@ -20,14 +20,24 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->input('tab', 'recommend');
+        $keyword = $request->keyword;
 
         if($tab === 'recommend'){
-            $items = Item::where('user_id', '!=', Auth::id())->get();
+            $items = Item::where('user_id', '!=', Auth::id())
+                    ->when($keyword, function($q, $keyword){
+                        $q->where('itemname', 'like', '%'.$keyword.'%');
+                    })
+                    ->get();
         }else{
-            $items= Like::where('user_id', Auth::id())
-                        ->with('item')
-                        ->get()
-                        ->pluck('item');
+            $items = Like::where('user_id', Auth::id())
+                ->whereHas('item', function ($q) use ($keyword) {
+                    $q->when($keyword, function ($q2, $keyword) {
+                        $q2->where('itemname', 'like', '%' . $keyword . '%');
+                    });
+                })
+                ->with('item')
+                ->get()
+                ->pluck('item');
         }
         return view('index', compact('tab', 'items'));
     }

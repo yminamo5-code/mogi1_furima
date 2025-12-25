@@ -12,8 +12,37 @@
     <header>
         <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ">
         @hasSection('search')
-        <input class="search" type="text" placeholder="　なにをお探しですか？">
+            @if (Route::currentRouteName() === 'index')
+                <form method="get"  action="{{route('index')}}">
+                    <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
+                    <input 
+                        class="search"
+                        type="text"
+                        name="keyword"
+                        placeholder="　なにをお探しですか？"
+                        value="{{request('keyword')}}"
+                    >
+                </form>
+            @elseif (Route::currentRouteName() === 'mypage')
+                <form method="get"  action="{{route('index')}}">
+                    <input 
+                        class="search"
+                        type="text"
+                        name="keyword"
+                        placeholder="　なにをお探しですか？"
+                        value="{{request('keyword')}}"
+                    >
+                </form>
+            @else
+                <input 
+                    class="search"
+                    type="text"
+                    name="keyword"
+                    placeholder="　なにをお探しですか？"
+                >
+            @endif
         @endif
+
         <div class="button">
             @hasSection('in_out')
             <!-- ログイン／ログアウト切り替え -->
