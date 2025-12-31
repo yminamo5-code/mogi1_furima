@@ -40,11 +40,20 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $tab = $request->input('page', 'sell');
+        $keyword = $request->keyword;
 
         if($tab === 'sell'){
-            $items = Item::where('user_id', Auth::id())->get();
+            $items = Item::where('user_id', Auth::id())
+                        ->when($keyword, function($q, $keyword){
+                            $q->where('itemname', 'like', '%'.$keyword.'%');
+                        })
+                    ->get();
         }else{
-            $items = $user->purchases()->with('item')->get()->pluck('item');
+            $items = $user->purchases()->with('item')
+                            ->when($keyword, function($q, $keyword){
+                                $q->where('itemname', 'like', '%'.$keyword.'%');
+                            })
+                            ->get()->pluck('item');
         }
         return view('mypage', compact('user', 'tab', 'items'));
     }

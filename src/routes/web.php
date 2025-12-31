@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,8 @@ Route::middleware('auth')->group(function(){
     Route::post('/item/{item_id}', [ItemController::class, 'toggleLike'])->name('item.like');
     Route::get('/purchase/address/{id}', [ItemController::class, 'address_edit'])->name('address.edit');
     Route::post('/purchase/address/{id}', [ItemController::class, 'address_update'])->name('address.update');
-    Route::post('/pay', [ItemController::class, 'pay'])->name('pay');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 });
 
 

@@ -46,7 +46,7 @@
             @foreach($items as $item)
                 <div class="item">
                     <a href="{{ route('item.show', $item->id) }}">
-                        <img src="{{ asset('storage/images' . $item->image) }}" alt="商品画像">
+                        <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">
                         <p>{{ $item->itemname }}</p>
                     </a>
                 </div>

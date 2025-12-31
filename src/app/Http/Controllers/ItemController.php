@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AddressRequest;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\ExhibitionRequest;
-use App\Http\Requests\PurchaseRequest;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Item;
 use App\Models\Like;
+use App\Models\Purchase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +22,8 @@ class ItemController extends Controller
         $keyword = $request->keyword;
 
         if($tab === 'recommend'){
-            $items = Item::where('user_id', '!=', Auth::id())
+            $items = Item::with('purchase')
+                    ->where('user_id', '!=', Auth::id())
                     ->when($keyword, function($q, $keyword){
                         $q->where('itemname', 'like', '%'.$keyword.'%');
                     })
@@ -35,7 +35,7 @@ class ItemController extends Controller
                         $q2->where('itemname', 'like', '%' . $keyword . '%');
                     });
                 })
-                ->with('item')
+                ->with('item.purchase')
                 ->get()
                 ->pluck('item');
         }
@@ -171,14 +171,4 @@ class ItemController extends Controller
         $item = Item::findOrFail($id);   
         return view('purchase',compact('item','user'));
     }
-
-
-    public function pay(PurchaseRequest $request)
-    {
-
-        
-        return redirect()->route('index');
-    }
-
-
 }

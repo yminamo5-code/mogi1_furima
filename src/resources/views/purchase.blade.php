@@ -20,8 +20,10 @@
 @section('content')
 <main>
     <div class="left">
-        <form id="payform" action="{{ route('pay') }}" method="post">
+        <form id="payform" action="{{ route('payment.store') }}" method="post">
         @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+
             <div class="row1">
                 <div>
                     <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">

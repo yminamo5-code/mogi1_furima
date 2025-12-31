@@ -24,7 +24,7 @@
                     >
                 </form>
             @elseif (Route::currentRouteName() === 'mypage')
-                <form method="get"  action="{{route('index')}}">
+                <form method="get"  action="{{route('mypage')}}">
                     <input 
                         class="search"
                         type="text"
