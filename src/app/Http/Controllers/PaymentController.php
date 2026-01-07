@@ -14,12 +14,22 @@ class PaymentController extends Controller
 {
     public function store(PurchaseRequest $request)
     {
-        $item = Item::findOrFail($request->item_id);
+        $item = Item::findOrfail($request->item_id);
+
+        if($request->paymethod === 'コンビニ払い'){
+            Purchase::create([
+                'user_id' => auth()->id(),
+                'item_id' => $request->item_id,
+                'paymethod' => $request->paymethod
+            ]);
+
+            return redirect('/');
+        }
 
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = Session::create([
-            'payment_method_types' => ['card', 'konbini'],
+            'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',

@@ -34,12 +34,9 @@
             @error('password_confirmation')
             <div class="error">{{ $message }}</div>
             @enderror
-        </div>
-
+        </div>      
         <button class="button-admin" type="submit">登録する</button>
+        <a class="login" href="/login">ログインはこちら</a>
     </form>
-    <a class="login" href="/login">ログインはこちら</a>
-
-
 </main>
 @endsection

@@ -36,12 +36,12 @@
 
             <div class="row2">
                 <h2 class=row2-title>支払い方法</h2>
-                <select name="payment_method" id="payment-method">
+                <select name="paymethod" id="paymethod">
                     <option value="" disabled selected>選択してください　　　　　　　　▼</option>
                     <option value="コンビニ払い">コンビニ払い</option>
                     <option value="カード払い">カード払い</option>
                 </select>
-                @error('payment_method')
+                @error('paymethod')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
@@ -67,7 +67,7 @@
             <div class="cell">商品代金</div>
             <div class="cell">&yen;{{number_format($item->price) }}</div>
             <div class="cell">支払い方法</div>
-            <div class="cell" id="payment-method-display">コンビニ払い</div>
+            <div class="cell" id="paymethod-display">コンビニ払い</div>
         </div>
         <button class="purchase" type="submit" form="payform">購入する</button>
     </div>
@@ -75,8 +75,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded',function(){
-        const select = document.getElementById('payment-method');
-        const display = document.getElementById('payment-method-display');
+        const select = document.getElementById('paymethod');
+        const display = document.getElementById('paymethod-display');
 
         select.addEventListener('change',function(){
             display.textContent = select.value;

@@ -13,8 +13,12 @@ services:
 
   php:
     build: ./docker/php
+    env_file:
+      - ./src/.env
     volumes:
       - ./src:/var/www/
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql:8.0.26

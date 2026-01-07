@@ -24,7 +24,7 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'payment_method' => ['required'],
+            'paymethod' => ['required'],
             'postcode' => ['required'],
             'address' => ['required'],
             'building' => ['nullable']
@@ -34,7 +34,7 @@ class PurchaseRequest extends FormRequest
     public function messages()
     {
         return [
-            'payment_method.required' => '支払い方法を選択してください'
+            'paymethod.required' => '支払い方法を選択してください'
         ];
     }        
 

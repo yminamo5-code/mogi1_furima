@@ -23,9 +23,17 @@
 
     <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
+
         <div class="icon">
-            <input type="file" name="image" accept="image/*">
-            <div>画像を選択する</div>
+            <div class="icon-circle">
+                <img id="preview" src="" alt="">
+            </div>
+
+            <button type="button" id="select-image" class="select-button">
+                画像を選択する
+            </button>
+
+            <input type="file" id="image-input" name="image" accept="image/*" hidden>
         </div>
 
         <div class="information">
@@ -52,7 +60,21 @@
         </div>
         <button class="button-admin" type="submit">更新する</button>
     </form>
-
-
 </main>
+
+<script>
+    document.getElementById('select-image').addEventListener('click', function () {
+        document.getElementById('image-input').click();
+    });
+
+    document.getElementById('image-input').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const preview = document.getElementById('preview');
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    });
+</script>
 @endsection
+
