@@ -25,8 +25,10 @@
         @csrf
         <div>商品画像</div>
         <div class="picture_input">
-            <input type="file" name="image" accept="image/*">
-            <div>画像を選択する</div>
+            <label>
+                <input type="file" name="image" accept="image/*">
+                <div>画像を選択する</div>
+            </label>
         </div>
         @error('image')
         <div class="error">{{ $message }}</div>
@@ -34,30 +36,32 @@
             
 
         <h2>商品の詳細</h2>
+        <div class="category_wrapper">
             <div>カテゴリー</div>
-                <div class="categories">
-                    @foreach($categories as $category)
-                        <label class="category">
-                            <input type="checkbox" name="categories[]" value="{{ $category->id }}">
-                            <span>{{ $category->category }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            @error('categories')
-            <div class="error">{{ $message }}</div>
-            @enderror
+            <div class="categories">
+                @foreach($categories as $category)
+                    <label class="category">
+                        <input type="checkbox" name="categories[]" value="{{ $category->id }}">
+                        <span>{{ $category->category }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+        @error('categories')
+        <div class="error">{{ $message }}</div>
+        @enderror
 
-            <div>商品の状態</div>
-            <select name="condition">
-                <option value="" disabled selected>選択してください　　　　　　　　▼</opution>
-                <option value="良好">良好</opution>
-                <option value="目立った傷や汚れなし">目立った傷や汚れなし</opution>
-                <option value="やや傷や汚れあり">やや傷や汚れあり</opution>
-                <option value="状態が悪い">状態が悪い</opution>
-            </select>
-            @error('condition')
-            <div class="error">{{ $message }}</div>
-            @enderror
+        <div>商品の状態</div>
+        <select name="condition">
+            <option value="" disabled selected>選択してください　　　　　　　　▼</option>
+            <option value="良好">良好</option>
+            <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
+            <option value="やや傷や汚れあり">やや傷や汚れあり</option>
+            <option value="状態が悪い">状態が悪い</option>
+        </select>
+        @error('condition')
+        <div class="error">{{ $message }}</div>
+        @enderror
 
         <h2>商品名と説明</h2>
             <div>商品名</div>

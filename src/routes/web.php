@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\EmailVerificationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +24,16 @@ Route::post('/',[AuthController::class, 'login_post'])->name('login.post');
 Route::get('/',[ItemController::class, 'index'])->name('index');
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/email/verify', function () {return view('verify-email');})->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
 Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
 
-Route::middleware('auth')->group(function(){
-    Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
+Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/mypage/profile', [UserController::class, 'profile'])->name('profile');
     Route::post('/mypage/profile/update', [UserController::class, 'profile_update'])->name('profile.update');
+    Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
     Route::get('/purchase/{id}', [ItemController::class, 'return_purchase'])->name('return.purchase');
     Route::post('/purchase/{id}', [ItemController::class, 'purchase'])->name('item.purchase');
     Route::post('/comment', [ItemController::class, 'comment'])->name('comment');

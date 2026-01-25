@@ -8,15 +8,16 @@ use App\Models\Item;
 use App\Models\User;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
         $user = app(CreatesNewUsers::class)->create($request->validated());
+        event(new Registered($user));
         Auth::login($user);
-
-        return redirect()->route('profile');
+        return redirect()->route('verification.notice');
     }   
 
     public function login_post(LoginRequest $request)

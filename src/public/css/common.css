@@ -3,29 +3,43 @@ header{
     height:82px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
-header img{
+.header_left{
     height: 36px;
     margin-left: 25px;
 }
 
-.search{
+.header_center{
     background-color: #FFFFFF;
-    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 563px;
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
 }
 
 .search::placeholder{
     color: #000000;
 }
 
-.button{
+.header_right{
+    position: absolute;
+    right: 0px;
     display: flex;
-
+    align-items: center;
+    width:463px;
+    gap:37px;
 }
+
 .in_out{
     color:#FFFFFF;
     font-size: 20px;
+    text-decoration: none;
 }
 
 .mypage{

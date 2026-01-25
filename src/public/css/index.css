@@ -1,3 +1,14 @@
+.label{
+    height:47px;
+    display: flex;
+    align-items: center;
+    padding-left: 129px;
+    width: 100%;
+    border-bottom:2px solid #5F5F5F;
+    margin-top: 47px;
+    gap:52px;
+}
+
 .label a.active-tab {
     color: #FF0000;
 }
@@ -10,6 +21,8 @@
 
 .items{
     margin-top: 80px;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
     flex-wrap: wrap;
     gap: 69px;
@@ -19,12 +32,18 @@
     height: 320px;
     width: 290px;
     box-sizing: border-box;
+    font-size: 25px;
 }
 
 .item img {
     width: 100%;
-    height: auto;
+    height: 290px;
     display: block;
+}
+
+.item a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .image-wrapper{

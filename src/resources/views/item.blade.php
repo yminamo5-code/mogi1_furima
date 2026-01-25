@@ -23,10 +23,11 @@
         <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">
     </div>
 
+    <div class="spacer"></div>
     <div class="right">
         <h1>{{ $item->itemname }}</h1>
-        <p>{{ $item->brand }}</p>
-        <p>&yen;{{number_format($item->price) }}(税込み)</p>
+        <p class="brand">{{ $item->brand }}</p>
+        <p class="price">&yen;{{number_format($item->price) }}(税込み)</p>
 
         <div class="like_comment">
             <div class="like">
@@ -40,12 +41,12 @@
                         @endif
                     </button>
                 </form>
-                    <p>{{ $likeCount }}</p>
+                    <div>{{ $likeCount }}</div>
             </div>
 
             <div class="comment_logo">
                 <img src="{{ asset('images/ふきだしロゴ.png') }}" alt="ふきだしロゴ">
-                <p>{{ $commentCount }}</p>
+                <div>{{ $commentCount }}</div>
             </div>
         </div>
 
@@ -56,16 +57,20 @@
         </form>
 
         <h2>商品説明</h2>
-        <p>{{ $item->description }}</p>
+        <p class="description">{{ $item->description }}</p>
 
         <h2>商品の情報</h2>
-        <div class="category">
-            <div>カテゴリー</div>
-            <div>あ</div>                                 <!--カテゴリー-->
+        <div class="category_container">
+            <div class="category_title">カテゴリー</div>
+            <div class="category_items">
+                @foreach($item->categories as $category)
+                    <div class="category_item">{{$category->category}}</div>
+                @endforeach
+            </div>
         </div>
-        <div class="condition">
-            <div>商品の状態</div>
-            <div>{{ $item->condition }}</div>
+        <div class="condition_wrap">
+            <div class="condition_title">商品の状態</div>
+            <div class="condition">{{ $item->condition }}</div>
         </div>
 
         <div class="comment_title">コメント({{ $commentCount }})</div>
@@ -91,7 +96,7 @@
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <button type="submit">コメントを送信する</button>
+            <button class="comment_button" type="submit">コメントを送信する</button>
         </form>
 
 

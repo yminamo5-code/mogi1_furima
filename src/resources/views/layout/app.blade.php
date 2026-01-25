@@ -10,59 +10,68 @@
 </head>
 <body>
     <header>
-        <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ">
+        <div class="header_left">
+            <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ">
+        </div>
+
         @hasSection('search')
-            @if (Route::currentRouteName() === 'index')
-                <form method="get"  action="{{route('index')}}">
-                    <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
+            <div class=header_center>
+                @if (Route::currentRouteName() === 'index')
+                    <form method="get"  action="{{route('index')}}">
+                        <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
+                        <input 
+                            class="search"
+                            type="text"
+                            name="keyword"
+                            placeholder="　なにをお探しですか？"
+                            value="{{ session('keyword', request('keyword', '')) }}"
+                        >
+                    </form>
+                @elseif (Route::currentRouteName() === 'mypage')
+                    <form method="get"  action="{{route('mypage')}}">
+                        <input type="hidden" name="page" value="{{ request('page', 'sell') }}">
+                        <input 
+                            class="search"
+                            type="text"
+                            name="keyword"
+                            placeholder="　なにをお探しですか？"
+                            value="{{ session('keyword', request('keyword', '')) }}"
+                        >
+                    </form>
+                @else
                     <input 
                         class="search"
                         type="text"
                         name="keyword"
                         placeholder="　なにをお探しですか？"
-                        value="{{request('keyword')}}"
+                        value="{{ request('keyword', '') }}"
                     >
-                </form>
-            @elseif (Route::currentRouteName() === 'mypage')
-                <form method="get"  action="{{route('mypage')}}">
-                    <input 
-                        class="search"
-                        type="text"
-                        name="keyword"
-                        placeholder="　なにをお探しですか？"
-                        value="{{request('keyword')}}"
-                    >
-                </form>
-            @else
-                <input 
-                    class="search"
-                    type="text"
-                    name="keyword"
-                    placeholder="　なにをお探しですか？"
-                >
-            @endif
+                @endif
+            </div>
         @endif
+        
 
-        <div class="button">
+        <div class="header_right">
             @hasSection('in_out')
-            <!-- ログイン／ログアウト切り替え -->
-            @if (Auth::check())
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button type="submit" class="in_out">ログアウト</button>
-                </form>
+                <!-- ログイン／ログアウト切り替え -->
+                @if (Auth::check())
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="in_out">ログアウト</button>
+                    </form>
 
-            @else
-                <!-- 未ログイン時：ログインボタン -->
-                <a href="/login" class="in_out">ログイン</a>
-            @endif
+                @else
+                    <!-- 未ログイン時：ログインボタン -->
+                    <a href="/login" class="in_out">ログイン</a>
+                @endif
             @endif
 
             @hasSection('mypage')
-            <a href="{{ route('mypage') }}" class="mypage">マイページ</a>
+                <a href="{{ route('mypage', ['keyword' => request('keyword')]) }}" class="mypage">マイページ</a>
             @endif
+
             @hasSection('sell')
-            <a href="{{ route('sell') }}" class="sell">出品</a>
+                <a href="{{ route('sell') }}" class="sell">出品</a>
             @endif
         </div>   
     </header>

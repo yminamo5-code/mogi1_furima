@@ -39,7 +39,7 @@ class RegisterRequest extends FormRequest
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => 'メールアドレスはメール形式で入力してください',
             'password.required' => 'パスワードを入力してください',
-            'password.min' => 'パスワードは8文字以上にしてください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
             'password_confirmation.required' => 'パスワードを入力してください',
             'password_confirmation.same' => 'パスワードと一致しません',
         ];

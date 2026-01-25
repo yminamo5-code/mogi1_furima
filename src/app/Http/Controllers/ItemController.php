@@ -20,7 +20,9 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->input('tab', 'recommend');
-        $keyword = $request->keyword;
+        $keyword = $request->input('keyword', $request->session()->get('keyword', ''));
+        
+        $request->session()->put('keyword', $keyword);
 
         if($tab === 'recommend'){
             $items = Item::with('purchase')
@@ -46,7 +48,7 @@ class ItemController extends Controller
     public function show($id)
     {
         $user = auth()->user();
-        $item = Item::findOrFail($id);
+        $item = Item::with('categories')->findOrFail($id);
 
         if ($user) {
             $liked = Like::where('user_id', $user->id)

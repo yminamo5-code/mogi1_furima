@@ -6,23 +6,23 @@ main{
     
 h1{
     margin-top: 59px;
-}
-
-.information input{
-    border:1px solid #5F5F5F ;
+    font-size: 36px;
+    width:299px;
+    height:47px;
 }
 
 .icon {
     display: flex;
     align-items: center;
     gap: 16px;
+    margin-top: 47px;
 }
 
 .icon-circle {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background-color: #ddd;
+    background-color: #D9D9D9;
     overflow: hidden;
 }
 
@@ -34,15 +34,40 @@ h1{
 }
 
 .select-button {
-    padding: 8px 16px;
-    border: 1px solid #333;
+    margin-left: 40px;
+    width:179px;
+    height:49px;
+    color: #FF5555;
+    border: 2px solid #FF5555;
     background: #fff;
-    border-radius: 6px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
+.information{
+    margin-top: 76px;
+}
+
+.label{
+    margin-top: 62px;
+    font-size: 24px;
+    font-style: bold;
+}
+
+.information input{
+    border:1px solid #5F5F5F ;
+    border-radius: 4px;
+    width:680px;
+    height:55px;
+}
+
 .button-admin{
+    margin-top: 67px;
+    width:680px;
     height: 60px;
     background-color: #FF5555;
     color: #FFFFFF;
+    font-size: 26px;
+    font-style: bold;
+    margin-bottom: 100px;
 }

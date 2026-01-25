@@ -1,0 +1,36 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.message{
+    margin-top: 237px;
+    font-size: 24px;
+    font-style: bold;
+    width:720px;
+    text-align: center;
+}
+
+.button{
+    margin-top: 62px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+    color: #000000;
+    font-size: 24px;
+    font-style: bold;
+    width:257px;
+    height:69px;
+}
+
+.resend{
+    margin-top: 52px;
+    font-size: 20px;
+    width:53.29px;
+    width: 257px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -25,8 +25,8 @@
         <a href="{{route('profile')}}" class="edit">プロフィールを編集</a>
     </div>
     <div class="row2">
-        <a href="{{ url('/mypage?page=sell') }}" class="{{$tab === 'sell' ? 'active-tab' : ''}}">出品した商品</a>
-        <a href="{{ url('/mypage?page=buy') }}" class="{{$tab === 'buy' ? 'active-tab' : ''}}">購入した商品</a>
+        <a href="{{ url('/mypage?page=sell&keyword=' . session('keyword', '')) }}" class="{{$tab === 'sell' ? 'active-tab' : ''}}">出品した商品</a>
+        <a href="{{ url('/mypage?page=buy&keyword=' . session('keyword', '')) }}" class="{{$tab === 'buy' ? 'active-tab' : ''}}">購入した商品</a>
     </div>
     <div class="row3">
     @if($tab === 'sell')
