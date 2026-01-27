@@ -10,34 +10,72 @@
 </head>
 <body>
     <header>
-        <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ">
+        <div class="header_left">
+            <img src="{{ asset('images/COACHTECHヘッダーロゴ.png')}}" alt="ロゴ">
+        </div>
+
         @hasSection('search')
-        <input class="search" type="text" placeholder="　なにをお探しですか？">
+            <div class=header_center>
+                @if (Route::currentRouteName() === 'index')
+                    <form method="get"  action="{{route('index')}}">
+                        <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
+                        <input 
+                            class="search"
+                            type="text"
+                            name="keyword"
+                            placeholder="　なにをお探しですか？"
+                            value="{{ session('keyword', request('keyword', '')) }}"
+                        >
+                    </form>
+                @elseif (Route::currentRouteName() === 'mypage')
+                    <form method="get"  action="{{route('mypage')}}">
+                        <input type="hidden" name="page" value="{{ request('page', 'sell') }}">
+                        <input 
+                            class="search"
+                            type="text"
+                            name="keyword"
+                            placeholder="　なにをお探しですか？"
+                            value="{{ session('keyword', request('keyword', '')) }}"
+                        >
+                    </form>
+                @else
+                    <input 
+                        class="search"
+                        type="text"
+                        name="keyword"
+                        placeholder="　なにをお探しですか？"
+                        value="{{ request('keyword', '') }}"
+                    >
+                @endif
+            </div>
         @endif
+        
 
-        <!-- ログイン／ログアウト切り替え -->
-        @auth
-            {{-- ログイン中：ログアウトボタン --}}
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="in_out">ログアウト</button>
-            </form>
-        @endauth
+        <div class="header_right">
+            @hasSection('in_out')
+                <!-- ログイン／ログアウト切り替え -->
+                @if (Auth::check())
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="in_out">ログアウト</button>
+                    </form>
 
-        @guest
-            <!-- 未ログイン時：ログインボタン -->
-            <a href="{{ route('login') }}" class="in_out">ログイン</a>
-        @endguest
+                @else
+                    <!-- 未ログイン時：ログインボタン -->
+                    <a href="/login" class="in_out">ログイン</a>
+                @endif
+            @endif
 
-        @hasSection('mypage')
-        <a href="{{ route('profile') }}" class="mypage">マイページ</a>
-        @endif
-        @hasSection('sell')
-        <a href="{{ route('list') }}" class="list">出品</a>
-        @endif
+            @hasSection('mypage')
+                <a href="{{ route('mypage', ['keyword' => request('keyword')]) }}" class="mypage">マイページ</a>
+            @endif
 
-
+            @hasSection('sell')
+                <a href="{{ route('sell') }}" class="sell">出品</a>
+            @endif
+        </div>   
     </header>
+    
     <main class="content">
       @yield('content')
     </main>    

@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
              'postcode'=>'123-4567',
              'address'=>'東京都',
              'building'=>'コーポ◯◯',
+             'email_verified_at'=>'2025/1/1'
             ],
             ['name'=>'佐藤二朗',
              'email'=>'bb@yy',
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
              'postcode'=>'234-5678',
              'address'=>'岡山県',
              'building'=>'マンション✕✕',
+             'email_verified_at'=>'2025/1/1'
             ],
             ['name'=>'三郎',
              'email'=>'cc@yy',
@@ -38,6 +40,7 @@ class UsersTableSeeder extends Seeder
              'postcode'=>'cc@yy',
              'address'=>'北海道',
              'building'=>'アパート△△',
+             'email_verified_at'=>'2025/1/1'
             ],
         ];
         DB::table('users')->insert($users);

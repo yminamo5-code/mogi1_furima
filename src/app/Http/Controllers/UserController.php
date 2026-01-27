@@ -3,43 +3,72 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-
-    public function register(UserRequest $request)
+    public function profile_update(ProfileRequest $request)
     {
-        $data = $request->validated();
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        Auth::login($user);
-        return redirect()->route('profile_edit');
-    }
+        $user = auth()->user();
+        $path = $user->image;
 
-    public function profile_edit()
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $file->hashName();
+            $file->storeAs('images',$filename,'public');
+            $path = $filename;
+        }        
+
+        $user->update([
+            'image' => $path,
+            'name' => $request->name,
+            'postcode' => $request->postcode,
+            'address' => $request->address,
+            'building' => $request->building,
+        ]);
+
+        return redirect('/');
+    }        
+
+    public function mypage(Request $request)
     {
-    $user = Auth::user();
-    return view('profile_edit', compact('user'));
-    }
+        $user = Auth::user();
+        $tab = $request->input('page', 'sell');
+        $keyword = $request->input('keyword', $request->session()->get('keyword', ''));
 
-    
+        $request->session()->put('keyword', $keyword);
+
+        if($tab === 'sell'){
+            $items = Item::where('user_id', Auth::id())
+                            ->when($keyword, function($q, $keyword){
+                                $q->where('itemname', 'like', '%'.$keyword.'%');
+                            })
+                            ->get();
+        }else{
+            $items = $user->purchases()
+                            ->whereHas('item',function($q) use($keyword){
+                                if($keyword){
+                                    $q->where('itemname', 'like', '%' . $keyword . '%');
+                                }
+                            })
+                            ->with('item')
+                            ->get()
+                            ->pluck('item');
+        }
+        return view('mypage', compact('user', 'tab', 'items'));
+    }
 
     public function profile(Request $request)
     {
         $user = Auth::user();
-        $tab = $request->input('tab', 'page=sell');
 
-        if($tab === 'page=sell'){
-            $items = Item::where('user_id', Auth::id())->get();
-        }else{
-            $items = $user()->purchases()->with('item')->get()->pluck('item');
-        }
-        return view('profile', compact('user', 'tab', 'items'));
+        return view('profile_edit', compact('user'));
     }
 
 }

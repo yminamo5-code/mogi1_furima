@@ -1,5 +1,125 @@
+main{
+    display: flex;
+}
+
+.left{
+    margin-left: 80px;
+    width: 805px;
+}
+
+.row1{
+    margin-top: 93px;
+    display: flex;
+    height:230px;
+    border-bottom:1px solid #000000;
+}
+
+.item_wrap{
+    margin-left: 50px;
+}
+
+.price{
+    font-size: 30px;
+    margin-top: auto;
+}
+
+.row1 img{
+    width:177.53px;
+    height:177.53px;
+}
+
+h2{
+    font-size: 20px;
+}
+
+.row2{
+    height:190px;
+    border-bottom: 1px solid #000000;
+}
+
+.row2-title{
+    margin-left: 5px;
+    height: 85px;
+    width: 326px;
+    display: flex;
+    align-items: center;
+}
+
+.row2 select{
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+}
+
 select option {
-    background-color: #636769;
-    color: #EAEAEA;
-    border: 1.5px solid #B1B1B1;
+    margin-left: 96px;
+    color: #5F5F5F;
+    border: 1.5px solid #5F5F5F;
+    border-radius: 4px;
+}
+
+.row3{
+    height:215px;
+    border-bottom: 1px solid #000000;
+}
+
+.row3-1{
+    margin-left: 35px;
+    display: flex;
+    height: 85px;
+    align-items: center;
+}
+
+.row3-1 a {
+    width: 115px;
+    font-size: 20px;
+    margin-left: auto;
+    text-decoration: none;
+}
+
+.postcode,
+.address{
+    font-size: 20px;
+    margin-left: 96px;
+}
+
+.right{
+    margin-right: 85px;
+    margin-left: 100px;
+    width:440px;
+}
+
+.price{
+    margin-top: 93px;
+    border-collapse: collapse;
+    display: grid;
+
+    grid-template-columns: 220px 220px;
+    grid-template-rows: 115px 115px;
+}
+
+.cell{
+    border: 1px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.cell:nth-child(2),
+.cell:nth-child(4) {
+    border-left: none;
+}
+
+button.purchase{
+    margin-top: 66px;
+    height: 60px;
+    width: 440px;
+    display: grid;
+    place-items: center;
+    background-color: #FF5555;
+    color: #FFFFFF;
+}
+
+.error{
+    color: #FF5555;
 }

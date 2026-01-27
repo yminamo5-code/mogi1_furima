@@ -2,9 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Models\Item;
+use App\Models\User;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
-    //
+    public function register(RegisterRequest $request)
+    {
+        $user = app(CreatesNewUsers::class)->create($request->validated());
+        event(new Registered($user));
+        Auth::login($user);
+        return redirect()->route('verification.notice');
+    }   
+
+    public function login_post(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors([
+                'email' => 'ログイン情報が登録されていません',
+            ]);
+        }
+
+        return redirect('/?tab=mylist');
+    }
 }

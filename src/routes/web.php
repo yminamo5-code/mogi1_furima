@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\EmailVerificationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +19,31 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::match(['get', 'post'], '/', [ItemController::class, 'index']);
+Route::get('/login', function(){return view('auth.login');})->name('login');
+Route::post('/',[AuthController::class, 'login_post'])->name('login.post');
+Route::get('/',[ItemController::class, 'index'])->name('index');
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
-Route::post('/purchase', [ItemController::class, 'purchase'])->name('item.purchase');
-Route::post('/mypage/profile', [UserController::class, 'profile_edit'])->name('profile_edit');
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-Route::get('/list', [ItemController::class, 'list'])->name('list');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/email/verify', function () {return view('verify-email');})->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
+Route::get('/sell', [ItemController::class, 'sell'])->name('sell');
+
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/mypage/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/mypage/profile/update', [UserController::class, 'profile_update'])->name('profile.update');
+    Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
+    Route::get('/purchase/{id}', [ItemController::class, 'return_purchase'])->name('return.purchase');
+    Route::post('/purchase/{id}', [ItemController::class, 'purchase'])->name('item.purchase');
+    Route::post('/comment', [ItemController::class, 'comment'])->name('comment');
+    Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
+    Route::post('/item/{item_id}', [ItemController::class, 'toggleLike'])->name('item.like');
+    Route::get('/purchase/address/{id}', [ItemController::class, 'address_edit'])->name('address.edit');
+    Route::post('/purchase/address/{id}', [ItemController::class, 'address_update'])->name('address.update');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+});
+
+
+

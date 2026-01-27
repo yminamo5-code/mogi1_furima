@@ -6,7 +6,7 @@
 
 @section('content')
 <main>
-    <form action="/mypage/profile" method="post">
+    <form action="{{route('register')}}" method="post">
         @csrf
         <div class="information">
             <h1>会員登録</h1>
@@ -34,12 +34,9 @@
             @error('password_confirmation')
             <div class="error">{{ $message }}</div>
             @enderror
-        </div>
-
+        </div>      
         <button class="button-admin" type="submit">登録する</button>
+        <a class="login" href="/login">ログインはこちら</a>
     </form>
-    <a class="login" href="/login">ログインはこちら</a>
-
-
 </main>
 @endsection

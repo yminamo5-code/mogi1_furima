@@ -6,16 +6,21 @@ main{
 
 h1{
     height: 47.58px;
+    margin-bottom: 16px;
     display: flex;
     justify-content: center;
 }
 
 .information{
-    width: 100%;
+    margin-top: 96px;
+    width: 680px;
+    height: 678px;
 }
 
 .label{
     height: 35px;
+    font-size: 24px;
+    margin-top: 38px;
 }
 
 .information input{
@@ -26,13 +31,24 @@ h1{
 
 .button-admin{
     height: 62.25px;
+    width: 100%;
     background-color: #FF5555;
     color: #FFFFFF;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
 }
 
 .login{
     text-decoration: none;
     color: #0073CC;
+    display: flex;
+    justify-content: center;
+    margin-top: 17px;
+    height: 53.29px;
+    font-size: 20px;
 }
 
 .error{
