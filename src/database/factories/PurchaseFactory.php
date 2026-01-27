@@ -16,9 +16,12 @@ class PurchaseFactory extends Factory
     public function definition()
     {
         return [
-            'item_id' => Item::factory(),
-            'user_id' => User::factory(),
-            'paymethod' => $this->faker->randomElement(['クレジットカード', 'コンビニ払い']),
+            'item_id'   => Item::factory(),
+            'user_id'   => User::factory(),
+            'paymethod' => 'クレジットカード',
+            'postcode'  => '123-4567',
+            'address'   => '東京都テスト区',
+            'building'  => 'テストビル',
         ];
     }
 }

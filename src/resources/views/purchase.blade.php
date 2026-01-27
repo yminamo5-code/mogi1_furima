@@ -28,7 +28,7 @@
                 <div>
                     <img src="{{ asset('storage/images/' . $item->image) }}" alt="商品画像">
                 </div>
-                <div>
+                <div class="item_wrap">
                     <h1 class="itemname">{{$item->itemname}}</h1>
                     <p class="price">&yen;{{number_format($item->price) }}</p>
                 </div> 

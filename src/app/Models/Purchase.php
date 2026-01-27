@@ -12,9 +12,12 @@ class Purchase extends Model
     use HasFactory;
 
     protected $fillable = [
-    'user_id',
-    'item_id',
-    'paymethod',
+        'user_id',
+        'item_id',
+        'paymethod',
+        'postcode',
+        'address',
+        'building',
     ];
 
     public function item()

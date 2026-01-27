@@ -1,18 +1,44 @@
 .row1{
     display: flex;
+    height: 150px;
+    width: 1017px;
+    justify-content: center;
+    align-items: center;
+    margin: 78px auto 0 auto;
 }
-
-
 
 .row1 img{
     width:150px;
     height:150px;
     border-radius: 50%;
     object-fit: cover;
+    margin-right: auto;
 }
 
 .user{
     font-size: 36px;
+    margin-left: -200px;
+}
+
+.row1 a{
+    margin-left: auto;
+    text-decoration: none;
+    border: 2px solid #FF5555;
+    color: #FF5555;
+    font-size: 26px;
+    padding:5px 20px;
+    border-radius: 10px;
+}
+
+.row2{
+    margin-top: 77px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    padding-left: 129px;
+    width: 100%;
+    border-bottom: 2px solid #5F5F5F;
+    gap: 52px;
 }
 
 .row2 a{
@@ -30,7 +56,19 @@
     height:281px;
 }
 
+.items{
+    margin: 69px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 69px;
+}
+
 .item{
     width:290px;
     height:320px;
+}
+
+.item a{
+    text-decoration: none;
+    font-size: 24px;
 }

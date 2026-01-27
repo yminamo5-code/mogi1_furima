@@ -20,7 +20,10 @@ class PaymentController extends Controller
             Purchase::create([
                 'user_id' => auth()->id(),
                 'item_id' => $request->item_id,
-                'paymethod' => $request->paymethod
+                'paymethod' => $request->paymethod,
+                'postcode'  => $request->postcode,
+                'address'   => $request->address,
+                'building'  => $request->building,
             ]);
 
             return redirect('/');
@@ -44,7 +47,10 @@ class PaymentController extends Controller
 
             'success_url' => route('payment.success', [
                 'item_id' => $item->id,
-                'paymethod' => $request->payment_method
+                'paymethod' => $request->payment_method,
+                'postcode'  => $request->postcode,
+                'address'   => $request->address,
+                'building'  => $request->building,
             ]),
 
             'cancel_url' => route('item.show', $item->id),
@@ -58,7 +64,10 @@ class PaymentController extends Controller
         Purchase::create([
             'user_id' => auth()->id(),
             'item_id' => $request->item_id,
-            'paymethod' => $request->paymethod
+            'paymethod' => $request->paymethod,
+            'postcode'  => $request->postcode,
+            'address'   => $request->address,
+            'building'  => $request->building,
         ]);
 
         return redirect('/');

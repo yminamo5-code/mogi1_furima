@@ -88,7 +88,6 @@ class ItemController extends Controller
             ]);
         }
         return redirect()->back();
-
     }
 
     public function purchase(Request $request)

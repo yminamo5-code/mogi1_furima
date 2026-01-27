@@ -37,7 +37,7 @@
 
         <h2>商品の詳細</h2>
         <div class="category_wrapper">
-            <div>カテゴリー</div>
+            <div class="category_title">カテゴリー</div>
             <div class="categories">
                 @foreach($categories as $category)
                     <label class="category">
@@ -51,9 +51,9 @@
         <div class="error">{{ $message }}</div>
         @enderror
 
-        <div>商品の状態</div>
+        <div class="condition_title">商品の状態</div>
         <select name="condition">
-            <option value="" disabled selected>選択してください　　　　　　　　▼</option>
+            <option value="" disabled selected>選択してください　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　▼</option>
             <option value="良好">良好</option>
             <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
             <option value="やや傷や汚れあり">やや傷や汚れあり</option>
@@ -64,22 +64,22 @@
         @enderror
 
         <h2>商品名と説明</h2>
-            <div>商品名</div>
+            <div class="itemname_title">商品名</div>
             <input type="text" name="itemname">
             @error('itemname')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <div>ブランド名</div>
+            <div class="brand_title">ブランド名</div>
             <input type="text" name="brand">
 
-            <div>商品の説明</div>
+            <div class="description_title">商品の説明</div>
             <textarea name="description"></textarea>
             @error('description')
             <div class="error">{{ $message }}</div>
             @enderror
 
-            <div>販売価格</div>
+            <div class="price_title">販売価格</div>
             <div class="price-wrapper">
                 <input type="text" class="price" name="price" inputmode="numeric" pattern="[0-9]*">
             </div>

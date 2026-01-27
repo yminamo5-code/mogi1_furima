@@ -26,7 +26,7 @@
 
         <div class="icon">
             <div class="icon-circle">
-                <img id="preview" src="" alt="">
+                <img id="preview" src="{{ $user->image ? asset('storage/images/' . $user->image) : '' }}" alt="">
             </div>
 
             <button type="button" id="select-image" class="select-button">
